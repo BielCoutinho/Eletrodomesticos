@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'">
+    <title>EletroSeguro - Cliente</title>
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <form id="frmClient" class="mt-2 row g-3">
+
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="searchClient" maxlength="30" spellcheck="false"
+                    placeholder="Digite o nome ou CPF" autocomplete="off">
+                <ul id="suggestionList" class="suggestion-list"></ul>
+            </div>
+            <div class="col-sm-6">
+                <button type="button" class="btn btn-dark" id="btnRead" onclick="buscarCliente()">Buscar</button>
+            </div>
+
+            <hr class="mt-4 border border-primary border -1">
+
+            <input type="text" id="idClient">
+
+            <div class="col-md-8">
+                <label for="inputNameClient" class="form-label">Nome completo</label>
+                <input type="text" class="form-control" id="inputNameClient" spellcheck="false" maxlength="30" required>
+            </div>
+
+            <div class="col-md-4">
+                <label for="inputCPFClient" class="form-label">CPF</label>
+                <input type="text" class="form-control" id="inputCPFClient" spellcheck="false"
+                    oninput="validarCPF(this)" maxlength="14" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="inputEmailClient" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="inputEmailNameClient" spellcheck="false" maxlength="30"
+                    required>
+            </div>
+
+            <div class="col-md-4">
+                <label for="inputIPhoneClient" class="form-label">Telefone</label>
+                <input type="tel" class="form-control" id="inputIPhoneClient" spellcheck="false" maxlength="15" required
+                    oninput="mascaraTelefone(this)">
+            </div>
+
+            <div class="col-md-2">
+                <label for="inputCEPClient" class="form-label">CEP</label>
+                <input type="text" class="form-control" id="inputCEPClient" spellcheck="false" maxlength="9" required
+                    onblur="buscarCEP()">
+            </div>
+
+            <div class="col-md-6">
+                <label for="inputAddressClient" class="form-label">Logradouro</label>
+                <input type="text" class="form-control" id="inputAddressClient" spellcheck="false" maxlength="30"
+                    required>
+            </div>
+
+            <div class="col-md-3">
+                <label for="inputNumberClient" class="form-label">Numero</label>
+                <input type="number" class="form-control" id="inputNumberClient" spellcheck="false" maxlength="5"
+                    required>
+            </div>
+
+            <div class="col-md-3">
+                <label for="inputComplementClient" class="form-label">Complemento</label>
+                <input type="text" class="form-control" id="inputComplementClient" spellcheck="false" maxlength="12">
+            </div>
+
+            <div class="col-md-5">
+                <label for="inputNeighborhoodClient" class="form-label">Bairro</label>
+                <input type="text" class="form-control" id="inputNeighborhoodClient" spellcheck="false" maxlength="12"
+                    required>
+            </div>
+
+            <div class="col-md-4">
+                <label for="inputCityClient" class="form-label">Cidade</label>
+                <input type="text" class="form-control" id="inputCityClient" spellcheck="false" maxlength="12" required>
+            </div>
+
+            <div class="col-md-3">
+                <label for="inputUfClient" class="form-label">UF</label>
+                <select class="form-control" id="inputUfClient" name="UF" required>
+                    <option value="">Selecione</option>
+                    <option value="AC">AC</option>
+                    <option value="AL">AL</option>
+                    <option value="AP">AP</option>
+                    <option value="AM">AM</option>
+                    <option value="BA">BA</option>
+                    <option value="CE">CE</option>
+                    <option value="DF">DF</option>
+                    <option value="ES">ES</option>
+                    <option value="GO">GO</option>
+                    <option value="MA">MA</option>
+                    <option value="MT">MT</option>
+                    <option value="MS">MS</option>
+                    <option value="MG">MG</option>
+                    <option value="PA">PA</option>
+                    <option value="PB">PB</option>
+                    <option value="PR">PR</option>
+                    <option value="PE">PE</option>
+                    <option value="PI">PI</option>
+                    <option value="RJ">RJ</option>
+                    <option value="RN">RN</option>
+                    <option value="RS">RS</option>
+                    <option value="RO">RO</option>
+                    <option value="RR">RR</option>
+                    <option value="SC">SC</option>
+                    <option value="SP">SP</option>
+                    <option value="SE">SE</option>
+                    <option value="TO">TO</option>
+                </select>
+            </div>
+
+            <div class="d-flex justify-content-center align-items-center gap-3 mt-5" id="botoes">
+                <button type="submit" class="btn btn-success" id="btnCreate">Adicionar</button>
+                <button type="submit" class="btn btn-warning" id="btnUpdate" onclick="atualizarCliente()" disabled>Editar</button>
+                <button type="button" class="btn btn-danger" id="btnDelete" onclick="excluirCliente()" disabled>Delete</button>
+                <button type="reset" class="btn btn-info" id="btnReset" onclick="resetForm()">Limpar</button>
+              </div>
+              
+
+        </form>
+    </div>
+
+    <script src="../public/js/bootstrap.min.js"></script>
+    <script src="./rendererCliente.js"></script>
+</body>
+
+</html>
