@@ -212,7 +212,7 @@ const template = [
         submenu: [
             {
                 label: 'Repositório',
-                click: () => shell.openExternal('https://github.com/ericaviana12/mobitech')
+                click: () => shell.openExternal('https://github.com/BielCoutinho/Eletrodomesticos.git')
             },
             {
                 label: 'Sobre',
@@ -224,64 +224,93 @@ const template = [
 
 async function relatorioClientes() {
     try {
-        const clientes = await clientModel.find().sort({ nomeCliente: 1 })
-        const doc = new jsPDF('p', 'mm', 'a4')
-        const imagePath = path.join(__dirname, 'src', 'public', 'img', 'logo.png')
-        const imageBase64 = fs.readFileSync(imagePath, { encoding: 'base64' })
-        doc.addImage(imageBase64, 'PNG', 5, 8)
-
-        doc.setFontSize(26)
-        doc.text("Relatório de clientes", 14, 45)
-
-        const dataAtual = new Date().toLocaleDateString('pt-br')
-        doc.setFontSize(12)
-        doc.text(`Data: ${dataAtual}`, 160, 10)
-
-        let y = 60
-        doc.text("Nome", 14, y)
-        doc.text("Telefone", 80, y)
-        doc.text("Email", 130, y)
-        y += 5
-
-        doc.setLineWidth(0.5)
-        doc.line(10, y, 200, y)
-
-        y += 10
-        clientes.forEach((c) => {
-            if (y > 280) {
-                doc.addPage()
-                y = 20
-                doc.text("Nome", 14, y)
-                doc.text("Telefone", 80, y)
-                doc.text("Email", 130, y)
-                y += 5
-                doc.setLineWidth(0.5)
-                doc.line(10, y, 200, y)
-                y += 10
-            }
-
-            doc.text(String(c.nomeCliente || ''), 14, y)
-            doc.text(String(c.foneCliente || ''), 80, y)
-            doc.text(String(c.emailCliente || ''), 130, y)
-            y += 10
-        })
-
-        const paginas = doc.internal.getNumberOfPages()
-        for (let i = 1; i <= paginas; i++) {
-            doc.setPage(i)
-            doc.setFontSize(10)
-            doc.text(`Páginas ${i} de ${paginas}`, 105, 200, { align: 'center' })
+      const clientes = await clientModel.find().sort({ nomeCliente: 1 })
+      const doc = new jsPDF('l', 'mm', 'a4')
+  
+      const imagePath = path.join(__dirname, 'src', 'public', 'img', 'logo.png')
+      const imageBase64 = fs.readFileSync(imagePath, { encoding: 'base64' })
+      doc.addImage(imageBase64, 'PNG', 5, 8, 40, 20)
+  
+      doc.setFontSize(24)
+      doc.setFont('helvetica', 'bold')
+      doc.setTextColor(0, 0, 80)
+      doc.text('Relatório de Clientes', 60, 30)
+  
+      doc.setFontSize(12)
+      doc.setTextColor(100)
+      doc.setFont('helvetica', 'normal')
+      doc.text(`Data: ${new Date().toLocaleDateString('pt-BR')}`, 270, 15, { align: 'right' })
+  
+      // Cabeçalho colorido
+      let y = 50
+      doc.setFillColor(0, 123, 255)
+      doc.rect(5, y - 8, 285, 10, 'F')
+  
+      doc.setTextColor(255, 255, 255)
+      doc.setFontSize(12)
+      doc.setFont('helvetica', 'bold')
+      doc.text("Nome", 10, y)
+      doc.text("Telefone", 100, y)
+      doc.text("Email", 180, y)
+  
+      y += 4
+      doc.setDrawColor(0, 123, 255)
+      doc.setLineWidth(0.7)
+      doc.line(5, y + 2, 290, y + 2)
+      y += 10
+  
+      // Dados
+      clientes.forEach((c, index) => {
+        if (y > 180) {
+          doc.addPage()
+          y = 20
+          // Redesenha o cabeçalho
+          doc.setFillColor(0, 123, 255)
+          doc.rect(5, y - 8, 285, 10, 'F')
+          doc.setTextColor(255, 255, 255)
+          doc.setFont('helvetica', 'bold')
+          doc.setFontSize(12)
+          doc.text("Nome", 10, y)
+          doc.text("Telefone", 100, y)
+          doc.text("Email", 180, y)
+          y += 12
+          doc.setDrawColor(0, 123, 255)
+          doc.line(5, y - 2, 290, y - 2)
         }
-
-        const tempDir = app.getPath('temp')
-        const filePath = path.join(tempDir, 'clientes.pdf')
-
-        doc.save(filePath)
-        shell.openPath(filePath)
+  
+        const linhaIndex = Math.floor((y - 60) / 10)
+        doc.setFillColor(linhaIndex % 2 === 0 ? 230 : 245, 240, 255)
+        doc.rect(5, y - 7, 285, 8, 'F')
+  
+        doc.setTextColor(0, 0, 0)
+        doc.setFont('helvetica', 'normal')
+        doc.setFontSize(10)
+        doc.text(String(c.nomeCliente || '').substring(0, 40), 10, y)
+        doc.text(String(c.foneCliente || '').substring(0, 20), 100, y)
+        doc.text(String(c.emailCliente || '').substring(0, 35), 180, y)
+        y += 10
+      })
+  
+      const totalPages = doc.internal.getNumberOfPages()
+      for (let i = 1; i <= totalPages; i++) {
+        doc.setPage(i)
+        doc.setDrawColor(0, 123, 255)
+        doc.setLineWidth(0.7)
+        doc.line(5, 195, 290, 195)
+        doc.setFontSize(10)
+        doc.setTextColor(100)
+        doc.text(`Página ${i} de ${totalPages}`, 150, 200, { align: 'center' })
+      }
+  
+      const tempDir = app.getPath('temp')
+      const filePath = path.join(tempDir, 'clientes.pdf')
+      doc.save(filePath)
+      shell.openPath(filePath)
     } catch (error) {
-        console.log(error)
+      console.log(error)
     }
-}
+  }
+  
 
 ipcMain.on('search-suggestions', async (event, termo) => {
     try {
