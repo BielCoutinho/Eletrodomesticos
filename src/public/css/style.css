@@ -40,7 +40,7 @@ body {
 }
 
 
-/* Reset básico para imagens e corpo */
+
 
   
   .container.button {
@@ -121,7 +121,7 @@ body {
   }
   
   
-  /* Corpo da página e container */
+  
 body {
     background-color: #0d1117;
     color: #c9d1d9;
@@ -138,18 +138,18 @@ body {
     box-shadow: 0 0 30px rgba(88, 166, 255, 0.3);
   }
   
-  /* Formatação do formulário */
+  
   form#g-3 {
     margin-top: 10px;
   }
   
-  /* Labels */
+  
   label.form-label {
     color: #58a6ff;
     font-weight: 600;
   }
   
-  /* Inputs */
+  
   input.form-control,
   select.form-control {
     background-color: #0d1117;
@@ -168,13 +168,13 @@ body {
     outline: none;
   }
   
-  /* Placeholders */
+  
   input.form-control::placeholder {
     color: #7a8ba6;
     opacity: 1;
   }
   
-  /* Sugestão de lista */
+  
   .suggestion-list {
     background-color: #121821;
     border: 1px solid #2382ff;
@@ -199,7 +199,7 @@ body {
     border-radius: 8px;
   }
   
-  /* Botões */
+  
   button.btn {
     font-weight: 600;
     border-radius: 10px;
@@ -262,18 +262,18 @@ body {
   
   
   
-  /* Linha separadora */
+  
   hr {
     border-top: 1.5px solid #2382ff;
     margin: 1.5rem 0 2rem;
   }
   
-  /* Inputs escondidos (idClient) */
+  
   #idClient {
     display: none;
   }
   
-  /* Ajustes para inputs numéricos para evitar setinhas */
+  
   input[type=number]::-webkit-inner-spin-button, 
   input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none; 
@@ -284,7 +284,7 @@ body {
     -moz-appearance: textfield;
   }
   
-  /* Responsividade */
+  
   @media (max-width: 576px) {
     .container {
       padding: 20px 15px;
@@ -300,12 +300,12 @@ body {
     }
   }
 
-  /* Tema Preto e Azul - Ordem de Serviço */
+  
 
 body {
     background-color: #0d1117;
     color: #c9d1d9;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "EDU";
     padding-top: 30px;
   }
   

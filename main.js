@@ -26,8 +26,7 @@ const createWindow = () => {
   });
   Menu.setApplicationMenu(Menu.buildFromTemplate(template))
 
-  // Se você tiver um menu personalizado:
-  // Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+  
 
   win.loadFile(path.join(__dirname, 'src', 'views', 'index.html'));
 
@@ -112,7 +111,7 @@ function aboutWindow() {
 }
 
 
-// ✅ ESSENCIAL: sem isso, nada acontece
+
 app.whenReady().then(() => {
   createWindow();
 
@@ -241,7 +240,7 @@ async function relatorioClientes() {
       doc.setFont('helvetica', 'normal')
       doc.text(`Data: ${new Date().toLocaleDateString('pt-BR')}`, 270, 15, { align: 'right' })
   
-      // Cabeçalho colorido
+      
       let y = 50
       doc.setFillColor(0, 123, 255)
       doc.rect(5, y - 8, 285, 10, 'F')
@@ -259,12 +258,12 @@ async function relatorioClientes() {
       doc.line(5, y + 2, 290, y + 2)
       y += 10
   
-      // Dados
+      
       clientes.forEach((c, index) => {
         if (y > 180) {
           doc.addPage()
           y = 20
-          // Redesenha o cabeçalho
+          
           doc.setFillColor(0, 123, 255)
           doc.rect(5, y - 8, 285, 10, 'F')
           doc.setTextColor(255, 255, 255)
@@ -542,7 +541,7 @@ ipcMain.on('new-os', async (event, os) => {
         buttons: ['OK']
       }).then((result) => {
         if (result.response === 0) {
-          event.reply('reset-form') // isso dispara a função no renderer
+          event.reply('reset-form') 
         }
       })
     } catch (error) {
@@ -564,8 +563,7 @@ ipcMain.on('new-os', async (event, os) => {
         try {
           const dataOS = await osModel.findById(result);
 
-          console.log("Resultado do banco de dados:", dataOS); // Adicione isto
-  
+          console.log("Resultado do banco de dados:", dataOS); 
           if (dataOS) {
             event.reply('render-os', JSON.stringify(dataOS));
           } else {
@@ -575,7 +573,7 @@ ipcMain.on('new-os', async (event, os) => {
               message: "OS não encontrada.",
               buttons: ['OK']
             });
-            event.reply('render-os', null); // Envia null explicitamente
+            event.reply('render-os', null); 
           }
         } catch (error) {
           console.error("Erro ao buscar OS no banco de dados:", error);
@@ -585,7 +583,7 @@ ipcMain.on('new-os', async (event, os) => {
             message: "Erro ao buscar OS no banco de dados.",
             buttons: ['OK']
           });
-          event.reply('render-os', null); // Previne erro no renderer
+          event.reply('render-os', null); 
         }
       } else if (result !== null) {
         dialog.showMessageBox({
@@ -594,7 +592,7 @@ ipcMain.on('new-os', async (event, os) => {
           message: "Formato do número da OS inválido.\nVerifique e tente novamente.",
           buttons: ['OK']
         });
-        event.reply('render-os', null); // Envia null mesmo com ID inválido
+        event.reply('render-os', null); 
       }
     });
   });
@@ -741,7 +739,7 @@ ipcMain.on('new-os', async (event, os) => {
         doc.text((o.cliente?.telefone || '').substring(0, 15), 95, y)
         doc.text((o.eletrodomestico || '').substring(0, 20), 145, y)
         doc.text((o.problemaRelatado || '').substring(0, 30), 195, y)
-        doc.text(formatarValor(o.valorTotal || '0'), 280, y, { align: 'right' }) // Valor corrigido
+        doc.text(formatarValor(o.valorTotal || '0'), 280, y, { align: 'right' }) 
       })
   
       const paginas = doc.internal.getNumberOfPages()

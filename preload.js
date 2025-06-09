@@ -27,7 +27,7 @@ contextBridge.exposeInMainWorld('api', {
   searchOS: () => ipcRenderer.send('search-os'),
   validateClient: () => ipcRenderer.send('validate-client'),
   
-  // Listeners
+  
   renderOS: (callback) => ipcRenderer.on('render-os', (event, dataOS) => callback(event, dataOS)),
 
   resetForm: (callback) => ipcRenderer.on('reset-form', () => callback()),

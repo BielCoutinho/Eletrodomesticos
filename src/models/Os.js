@@ -1,7 +1,7 @@
 const { model, Schema } = require('mongoose');
 
 const osSchema = new Schema({
-  // 🔹 Datas
+  
   dataEntrada: {
     type: Date,
     default: Date.now
@@ -10,7 +10,7 @@ const osSchema = new Schema({
     type: Date
   },
 
-  // 🔹 Dados do cliente
+  
   cliente: {
     id: {
       type: Schema.Types.ObjectId,
@@ -21,16 +21,16 @@ const osSchema = new Schema({
     telefone: String
   },
 
-  // 🔹 Equipamento
-  eletrodomestico: String,     // Ex: Geladeira, Máquina de lavar
-  marca: String,               // Ex: Brastemp, Electrolux
+  
+  eletrodomestico: String,     
+  marca: String,               
   modelo: String,
   numeroSerie: String,
-  acessorios: String,          // Ex: Cabo de força, controle
+  acessorios: String,          
 
-  // 🔹 Situação e problema
-  problemaRelatado: String,    // Relato do cliente
-  diagnostico: String,         // Diagnóstico técnico
+  
+  problemaRelatado: String,    
+  diagnostico: String,         
   statusOS: {
     type: String,
     enum: [
@@ -45,8 +45,8 @@ const osSchema = new Schema({
     default: 'Em análise'
   },
 
-  // 🔹 Serviços e materiais
-  pecasUtilizadas: [String],   // Lista de peças trocadas
+  
+  pecasUtilizadas: [String],   
   maoDeObra: {
     type: Number,
     default: 0
@@ -65,8 +65,8 @@ const osSchema = new Schema({
     default: 'Dinheiro'
   },
 
-  // 🔹 Informações adicionais
-  garantia: String,            // Ex: 90 dias
+  
+  garantia: String,            
   tecnicoResponsavel: String,
   observacoes: String,
   clienteAprovou: {

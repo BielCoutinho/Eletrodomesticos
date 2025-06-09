@@ -54,12 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
     btnDelete.disabled = true
 })
 
-// Pegando botões
+
 const btnCreate = document.getElementById('btnCreate')
 const btnUpdate = document.getElementById('btnUpdate')
 const btnDelete = document.getElementById('btnDelete')
 
-// Pegando inputs do formulário (somente os que existem no HTML)
+
 const frmOS = document.getElementById('frmOS')
 const idOS = document.getElementById('inputOS')
 const dateOS = document.getElementById('inputDataEntrada')
@@ -173,14 +173,14 @@ api.renderOS((event, dataOS) => {
             second: "2-digit"
         });
 
-        // Corrigido de acordo com seu schema
+        
         idClient.value = os.cliente?.id || "";
         nameClient.value = os.cliente?.nome || "";
         phoneClient.value = os.cliente?.telefone || "";
 
         statusOS.value = os.statusOS || "";
 
-        // Correções de nomes
+        
         eletro.value = os.eletrodomestico || "";
         marca.value = os.marca || "";
         modelo.value = os.modelo || "";
@@ -188,7 +188,7 @@ api.renderOS((event, dataOS) => {
         acessorios.value = os.acessorios || "";
         problem.value = os.problemaRelatado || "";
         diagnostico.value = os.diagnostico || "";
-        pecas.value = (os.pecasUtilizadas || []).join(", "); // array → string
+        pecas.value = (os.pecasUtilizadas || []).join(", "); 
         maoDeObra.value = os.maoDeObra || 0;
         valorPecas.value = os.valorPecas || 0;
         valorTotal.value = os.valorTotal || 0;
